@@ -36,20 +36,7 @@ const StateProvider = ({ children }) => {
           }
         }
 
-      /*
-      let groupingProduct = Object.assign([], products.map(p => {
-        if (p.id === product.id) {
-          p.qty += product.qty;
-        }
-        console.log(p);
-        return p;
-      }));
-      console.log(groupingProduct);
-      return {
-        cartProduct: [...groupingProduct],
-        showCart: true
-      }
-      */
+      
       case 'REMOVE_PRODUCT_CART':
         let cardProductList = [...state.cartProduct];
         let newCardProductList = cardProductList.filter(data => data.id !== action.removeItemId);
@@ -70,7 +57,7 @@ const StateProvider = ({ children }) => {
         let _index = _products.findIndex(p => p.id === _product.id);
         _products[_index].qty = _product.qty;
         _products[_index].totPrice =_product.totPrice;
-        _subTotal += _products[_index].totPrice;
+        _subTotal = action.subTotal;
         return {
           cartProduct: [..._products],
           showCart: true,

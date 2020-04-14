@@ -1,5 +1,5 @@
 
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { store } from '../store/store';
 import './product.css'
 import ProductQty from './ProductQty';
@@ -9,7 +9,6 @@ const CartList = () => {
     const globalState = useContext(store);
     const { dispatch } = globalState;
     const { cartProduct, showCart,subTotal } = globalState.state;
-
     if (!showCart) return null;
     const hideCartPanelHandler = () => {
         dispatch({ type: 'TOGGLE_CART_PANEL', showCart: false });
@@ -20,20 +19,24 @@ const CartList = () => {
 
     const qtyIncementHandler = (id) =>{
         let products = [...cartProduct];
+        let subTot = subTotal;
         let index = products.findIndex(p => p.id === id);
         let product = products[index];
         product.qty = parseInt(product.qty) + 1;
-        product.totPrice = parseInt(product.totPrice) + parseInt(product.price);  
-        dispatch({ type: 'UPDATE_PRODUCT_CART',  payload: product});
+        product.totPrice = parseInt(product.totPrice) + parseInt(product.price); 
+        subTot += product.price; 
+        dispatch({ type: 'UPDATE_PRODUCT_CART',  payload: product,subTotal:subTot});
     }
 
     const qtyDecementHandler = (id) =>{
         let products = [...cartProduct];
+        let subTot = subTotal;
         let index = products.findIndex(p => p.id === id);
         let product = products[index];
         product.qty = parseInt(product.qty) - 1;
         product.totPrice = parseInt(product.totPrice)- parseInt(product.price); 
-        dispatch({ type: 'UPDATE_PRODUCT_CART',  payload: product});
+        subTot -= product.price; 
+        dispatch({ type: 'UPDATE_PRODUCT_CART',  payload: product,subTotal:subTot});
     }
 
     return (

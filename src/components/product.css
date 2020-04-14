@@ -18,6 +18,7 @@
 .product-card {
     padding: 2%;
     flex: 1 16%;
+    text-align: center;
 }
 
 .product-image img {
@@ -26,6 +27,8 @@
 
 .product-info {
     margin-top: auto;
+    justify-content: center;
+    text-align: center;
 }
 
 .cart-container{
@@ -37,6 +40,7 @@
     background-color: black;
     opacity: 0.9;
     position: fixed;
+    border: 1px solid;
     }
 .cart-product{
     width: 100%;
@@ -104,7 +108,10 @@
     color: grey;
     font-size: 22px;
 }
-
+.quantity{
+    justify-content: center;
+    text-align: center;
+}
 .card button {
 
     border: none;
